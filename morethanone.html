@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initail-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+            textarea {
+                height: 320px;
+                width: 500px;
+                float:center;
+            }
+          input {
+            width: 500px;
+          }
+          #date{
+            width:248px;
+
+          }
+          #sche{
+            float:right;
+            border:2px solid orange;
+            border-radius:3px;
+          padding: 2px;
+          margin:auto;
+       margin-right:40px;
+       color:cornflowerblue;
+           
+          }
+         #here  {
+            float:right;
+            border:2px solid orange;
+          padding: 2px;
+          margin:auto;
+       margin-right:6px;
+       border-radius:3px;
+       color:cornflowerblue;
+           
+          }
+          #form {
+             margin-left:270px;
+             margin-right:285px;
+             margin-top:none;
+             border:1px solid orange;
+             border-radius:8px;
+          }
+          #div{
+            margin-left:3px;
+            margin-bottom:3px;
+          }
+          #h3{
+            margin-left:200px;
+            color:orangered;
+          }
+          .submit{
+            background-color:darkorange;
+            color:white;
+            border:1px solid orangered;
+            border-radius:5px;
+            padding:8px;
+            margin-left:4px;
+          }
+          #backimage{
+            background-image:url(social.jpg);
+        
+          }
+         
+         
+        </style> 
+        <h5 id="sche">Schedule a call</h5>
+<h5 id="here">Hire with Us</h5>
+        
+    </head>
+  
+    <body id="backimage" >
+       
+   <!-- <textarea id="textarea" name="tarea" >
+               Book a call
+ Book a call slot and our representative will call you within 1hr of selected timse.
+
+    </textarea>-->
+    <form  id="form" onsubmit="saveToLocalStorage(event)"> 
+        <div>
+        <h3 id = "h3" >Book a call</h3>
+        <p style="margin-left:45px"><small>Book a call slot and our representative will call you within 1hr of selected time.</small></p>
+        <hr>
+        <div id="kumar">sonu</div>
+        <label for="name" class="label"><small>Name:</small></label><br>
+        <input type="text" class="addloc" id="t1" name="username" ><br>
+        <label for="email"><small>Email:</small></label><br>
+        <input type = "email" class="addloc" id="e1" name="email" ><br>
+        <label for="phone"><small>Phone:</small></label><br>
+        <input type="number"  id="n1" name="number"><br>
+        <label for="time"><small>Time for call:</small></label><br>
+        <input  id="date" name="date" type="date" value="2022-01-05" >
+      <input id="date" name="time" type="time" ><br><br>
+        <input class="submit" type="submit" value="GET A CALL">
+        </div>
+</form>
+<script >
+    let arr =[]
+    function saveToLocalStorage(event){
+    event.preventDefault()
+    const name =event.target.username.value
+    const email = event.target.email.value
+    const phone = event.target.number.value
+    const date = event.target.date.value 
+    const time = event.target.time.value
+    const myobj = {
+    name,
+    email,
+    phone,
+    date,
+    time,
+   
+ } 
+ let json = JSON.stringify(myobj)
+  arr.push(json)
+  document.querySelector('form').reset()
+  
+
+ 
+localStorage.setItem('myobj',arr)
+console.log(arr)
+let des = JSON.parse(localStorage.getItem('myobj'))
+console.log(arr)
+  } 
+ 
+
+  </script>
+</body>
+</html>

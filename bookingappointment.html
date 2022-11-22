@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h1>Booking Appointment App</h1></title>
+   
+</head>
+<body>
+    <h1>Booking Appointment App</h1>
+    <form id="addform" onsubmit="savetolocal(event)">
+  <label for="name">Name</label>
+   <input type="text" id="item" name="username" class="username">
+   <label for="email">email</label>
+   <input type="text" id='item1'name="email" id="item1" class="username">
+   <input type="submit" class="btn btn-dark"  value="Submit">
+   </form>
+   <ul id="listadd">
+     
+   </ul>
+
+
+   <script  >
+
+    let form =document.getElementById('addform')
+  let listadd = document.getElementById('listadd')
+form.addEventListener('submit',addItem)
+
+function addItem(e){
+    e.preventDefault()
+    var newItem =document.getElementById('item').value
+    var newItem1=document.getElementById('item1').value
+let li = document.createElement('li')
+li.className='list'
+li.appendChild(document.createTextNode(newItem))
+li.appendChild(document.createTextNode(newItem1))
+
+}
+let arr=[]
+function savetolocal(event){
+event.preventDefault()
+const user = event.target.username.value
+const email = event.target.email.value
+let mylocal={
+    user,
+    email,
+}
+let locla= JSON.stringify(mylocal)
+arr.push(locla)
+document.querySelector('form').reset()
+localStorage.setItem('myobj',arr)
+showNewUserOnScreen(mylocal)
+}
+function showNewUserOnScreen(user){
+    const parentNode = document.getElementById('listadd')
+    const childhtml = `<li>${user.user}  ${user.email}`
+        parentNode.innerHTML= parentNode.innerHTML+childhtml;
+}
+   </script>
+
+
+    
+</body>
+</html>

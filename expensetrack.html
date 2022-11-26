@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+<form id = 'form' onsubmit="savetolocal(event)">
+    <label for="Amount">Choose ExpenseAmount</label>
+    <input  type="number"  name="nameid" id = 'number' class="uniqe">
+    <label for="discription" >Choose Discription</label>
+    <input type="text" name="textid" id="text" class="uniqe">
+    <label for="category">Choose a Category</label>
+    <select name="optionid" id="option">
+
+ <option value="Movie">Movie</option>
+ <option value="cars">Cars</option>
+ <option value="fuel">Fuel</option>
+
+ <option value="taravlling">Travlling</option>
+ <option value="party">Party</option>
+</select>
+<button type="submit" vlaue="Add Expense">Add Expense</button>
+<ul id="ul">
+    <li id="li1" class="li">Sonu kushwaha</li>
+</ul>
+
+    
+   
+
+
+</form>
+
+
+    </body>
+    <script >
+
+function savetolocal(event){
+    event.preventDefault()
+    const name = event.target.nameid.value;
+    const text= event.target.textid.value
+    const option = event.target.optionid.value
+    const myobj = {
+        name,
+        text,
+        option,
+    }
+
+
+    let joson = JSON.stringify(myobj)
+    localStorage.setItem(myobj.name,joson)
+
+    shownewuseronscreen(myobj)
+}
+
+  
+function  shownewuseronscreen(screen){
+    document.getElementById('number').value = 'name',
+    document.getElementById('text').value = 'text'
+    document.getElementById('option').vlaue='option';
+    
+    
+    const prentNode = document.getElementById('ul')
+    const childnode = `<li id='${screen.name}'> ${screen.name} ${screen.text} ${screen.option}
+     <button onclick = deleteuser('${screen.name}')> Delete</button> 
+   
+     <button onclick = editUser('${screen.name}','${screen.text}','${screen.option}')>Edit</button>
+  </li>`
+    prentNode.innerHTML = prentNode.innerHTML+childnode;
+}
+//edit user 
+function editUser(nameid,textid,optionid){
+    document.getElementById('number').value=nameid;
+    document.getElementById('text').value= textid;
+    document.getElementById('option').vlaue = optionid;
+    deleteuser(nameid)
+}
+
+//delete user 
+ function deleteuser(nameid){
+    localStorage.removeItem(nameid);
+
+    removeuserscreen(nameid)
+   
+ }
+ function   removeuserscreen(nameid){
+const prentNode = document.getElementById('ul')
+const childnode = document.getElementById(nameid)
+prentNode.removeChild(childnode)
+
+if(childnode){
+    prentNode.removeChild(childnode)
+}
+ }
+
+
+        </script>
+</html>

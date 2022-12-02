@@ -34,7 +34,10 @@
 
 
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.2.0/axios.min.js"></script>
     <script >
+
+
 
 function savetolocal(event){
     event.preventDefault()
@@ -47,11 +50,19 @@ function savetolocal(event){
         option,
     }
 
-
-    let joson = JSON.stringify(myobj)
-    localStorage.setItem(myobj.name,joson)
-
+           axios.post('https://crudcrud.com/api/e3830f957ad64fdc8e47679a18c146ab/appointment',myobj)
+  .then(respone=>{
     shownewuseronscreen(myobj)
+    console.log(respone)
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+
+    // let joson = JSON.stringify(myobj)
+    // localStorage.setItem(myobj.name,joson)
+    // shownewuseronscreen(myobj)
+  
 }
 
   
@@ -89,9 +100,9 @@ const prentNode = document.getElementById('ul')
 const childnode = document.getElementById(nameid)
 prentNode.removeChild(childnode)
 
-if(childnode){
-    prentNode.removeChild(childnode)
-}
+// if(childnode){
+//     prentNode.removeChild(childnode)
+// }
  }
 
 

@@ -49,7 +49,7 @@ function savetolocal(event){
         text,
         option,
     }
-  axios.post('https://crudcrud.com/api/e662907bfbd64d57b6d6cfd2ef404d05/appointment',myobj)
+  axios.post('https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment',myobj)
   .then(respone=>{
     shownewuseronscreen(myobj)
     console.log(respone)
@@ -71,14 +71,14 @@ window.addEventListener("DOMContentLoaded",()=>{
     event.preventDefault()
     
 
-  axios.get(" https://crudcrud.com/api/e662907bfbd64d57b6d6cfd2ef404d05/appointment")  
+  axios.get("https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment")  
   .then(response=>{
     console.log(response)
     for(var i=0;i<response.length;i++){
-        shownewuseronscreen(response[i])
+        shownewuseronscreen(response[i]) 
     }
   })
-  .catch(err=>{
+  .catch(err=>{ 
     console.log(err)
   })
 })
@@ -92,10 +92,10 @@ function  shownewuseronscreen(screen){
     
     
     const prentNode = document.getElementById('ul')
-    const childnode = `<li id='${screen.name}'> ${screen.name} ${screen.text} ${screen.option}
-     <button onclick = deleteuser('${screen.name}')> Delete</button> 
+    const childnode = `<li id='${screen._id}'> ${screen.name} ${screen.text} ${screen.option}
+     <button onclick = deleteuser('${screen._id}')> Delete</button> 
    
-     <button onclick = editUser('${screen.name}','${screen.text}','${screen.option}')>Edit</button>
+     <button onclick = editUser('${screen._id},${screen.name}','${screen.text}','${screen.option}')>Edit</button>
   </li>`
     prentNode.innerHTML = prentNode.innerHTML+childnode;
 }
@@ -104,19 +104,29 @@ function editUser(nameid,textid,optionid){
     document.getElementById('number').value=nameid;
     document.getElementById('text').value= textid;
     document.getElementById('option').vlaue = optionid;
-    deleteuser(nameid)
+    deleteuser( screenId)
 }
 
 //delete user 
- function deleteuser(nameid){
-    localStorage.removeItem(nameid);
+ function deleteuser(screenId){
+    
+    axios.delete(`https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment/${screenId}`)
+    
+    .then(response=>{
+      removeuserscreen(screenId)
+        console.log(response)
+    }) 
+    // .catch(err=>{
+    //     console.log(err)
+    // })
+   // localStorage.removeItem(nameid);
 
-    removeuserscreen(nameid)
+     removeuserscreen(screenId)
    
  }
- function   removeuserscreen(nameid){
+ function   removeuserscreen(screenId){
 const prentNode = document.getElementById('ul')
-const childnode = document.getElementById(nameid)
+const childnode = document.getElementById(screenId)
 prentNode.removeChild(childnode)
 
 // if(childnode){

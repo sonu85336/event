@@ -49,7 +49,7 @@ function savetolocal(event){
         text,
         option,
     }
-  axios.post('https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment',myobj)
+  axios.post('https://crudcrud.com/api/81c9f285657947bab2bca980226df0ac/appointment',myobj)
   .then(respone=>{
     shownewuseronscreen(myobj)
     console.log(respone)
@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     event.preventDefault()
     
 
-  axios.get("https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment")  
+  axios.get("https://crudcrud.com/api/81c9f285657947bab2bca980226df0ac/appointment")  
   .then(response=>{
     console.log(response)
     for(var i=0;i<response.length;i++){
@@ -95,22 +95,23 @@ function  shownewuseronscreen(screen){
     const childnode = `<li id='${screen._id}'> ${screen.name} ${screen.text} ${screen.option}
      <button onclick = deleteuser('${screen._id}')> Delete</button> 
    
-     <button onclick = editUser('${screen._id},${screen.name}','${screen.text}','${screen.option}')>Edit</button>
+     <button onclick = editUser('${screen.name}','${screen.text}','${screen.option}','${screen._id}')>Edit</button>
   </li>`
     prentNode.innerHTML = prentNode.innerHTML+childnode;
 }
 //edit user 
-function editUser(nameid,textid,optionid){
+function editUser( nameid,textid,optionid,screenId){
     document.getElementById('number').value=nameid;
     document.getElementById('text').value= textid;
     document.getElementById('option').vlaue = optionid;
-    deleteuser( screenId)
+     
+    deleteuser(screenId)
 }
 
 //delete user 
  function deleteuser(screenId){
     
-    axios.delete(`https://crudcrud.com/api/98bd189eddba4e6d8acfc5c4132818ab/appointment/${screenId}`)
+    axios.delete(`https://crudcrud.com/api/81c9f285657947bab2bca980226df0ac/appointment/${screenId}`)
     
     .then(response=>{
       removeuserscreen(screenId)
